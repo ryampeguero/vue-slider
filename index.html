@@ -73,10 +73,10 @@
           </div>
 
           <div class="col-12 p-3" id="my-after-carousel">
-            <button id="my-order-button" class="btn btn-primary">
+            <button id="my-order-button" class="btn btn-primary" @click="reverseOrder">
               Inverti l'ordine di scorrimento
             </button>
-            <button id="my-stop-button" class="btn btn-primary">
+            <button id="my-stop-button" class="btn btn-primary"  @click="clearIntervalValue">
               Interrompi / Fai ripartire lo scorrimento
             </button>
           </div>

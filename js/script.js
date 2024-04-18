@@ -5,6 +5,10 @@ createApp({
         return{
             isActive: false,
             activeIndex: 0,
+            intervalValue: null,
+            BoolInterval: false,
+            forwardBool: true,
+
             images: [
                 {
                   image: "img/01.webp",
@@ -36,12 +40,15 @@ createApp({
     },
 
     created(){
-        console.log("Funziona");
+        if(this.BoolInterval == false)
+            this.intervalValue = this.setThumbInterval();
+
     },
 
     methods:{
         showNext: function(){
-            
+            forwardBool = true;
+            console.log(this.forwardBool);
             if(this.activeIndex === this.images.length - 1){
                 this.activeIndex = 0;
             }else{
@@ -52,6 +59,9 @@ createApp({
         
         showPrevious: function(){
             console.log(this.activeIndex);
+            console.log(this.forwardBool);
+            forwardBool = false;
+
             if(this.activeIndex <= 0){
                 this.activeIndex = this.images.length - 1;
             }else{
@@ -62,6 +72,43 @@ createApp({
 
         selectThumb: function(indexClick){
             this.activeIndex = indexClick;
+            this.BoolInterval = true;
+        },
+
+        setThumbInterval: function(){
+            let newInterval = null;
+            switch(this.forwardBool){
+                
+                case true:
+                     newInterval = setInterval(this.showNext, 3000);
+                    break;
+
+                case false:
+                     newInterval = setInterval(this.showPrevious, 3000);
+                     break;
+            }
+            
+            this.BoolInterval = true;
+            return newInterval;
+        },
+
+        clearIntervalValue: function(){
+            clearInterval(this.intervalValue);
+            if(this.BoolInterval){
+                this.BoolInterval = false;
+            }else{
+                this.intervalValue = this.setThumbInterval();
+            }
+            
+        },
+
+        reverseOrder: function(){
+            this.forwardBool = !this.forwardBool;
+            console.warn(this.forwardBool);
+            this.clearIntervalValue();
+           this.intervalValue = this.setThumbInterval()
+        
         }
+        
     }
 }).mount("#app");
