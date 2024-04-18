@@ -58,6 +58,10 @@ createApp({
                 this.activeIndex--;
             }
             
+        },
+
+        selectThumb: function(indexClick){
+            this.activeIndex = indexClick;
         }
     }
 }).mount("#app");
