@@ -37,7 +37,7 @@
                 <!-- immagini -->
 
                 <!-- immagine 1 -->
-                <div class="my-carousel-item"  :class="active" carousel-item="1" v-for="curImage in images">
+                <div class="my-carousel-item"  :class="(activeIndex === index) ? 'active' : ''" carousel-item="1" v-for="(curImage, index) in images" >
                   <img class="img-fluid" :src="curImage.image" :alt="curImage.title" />
                   <div class="item-description px-3">
                     <h2>{{curImage.title}}</h2>
@@ -51,14 +51,18 @@
                 <!-- etc .... -->
               </div>
               <div class="my-thumbnails position-relative">
+
+
                 <!-- prev -->
-                <div class="my-previous position-absolute">
+                <div class="my-previous position-absolute" @click="showPrevious">
                   <span class="my-prev-hook"></span>
                 </div>
                 <!-- next -->
-                <div class="my-next position-absolute">
+                <div class="my-next position-absolute" @click="showNext">
                   <span class="my-next-hook"></span>
                 </div>
+
+
                 <!-- immagini interne -->
                 <img class="img-fluid my-thumbnail active" src="./img/01.webp"
                   alt="Thumbnail of Marvel's Spiderman Miles Morale picture" />
